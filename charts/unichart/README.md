@@ -1,4 +1,4 @@
-# Stateful Apps Helm Chart (WIP)
+# Generic Helm Chart (WIP)
 
 A universal chart for many use cases. Supports both stateful and stateless applications. It can provision deployment, statefulset + headless service for DB, storage, and ingress.
 
