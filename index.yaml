@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  unichart:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-11-04T04:35:03.47983115Z"
+    description: A generic Helm chart, supports stateful and statless applications.
+    digest: e1aabbe1e14cabe400135872ba9c534756e19cc02b3c5e850cd298dd1987fe9d
+    maintainers:
+    - {}
+    name: unichart
+    urls:
+    - https://github.com/homecloud-labs/helm/releases/download/unichart-0.0.1/unichart-0.0.1.tgz
+    version: 0.0.1
+generated: "2025-11-04T04:35:03.479838093Z"
