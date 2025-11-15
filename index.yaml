@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  gha-runner-deployment:
+  - apiVersion: v2
+    appVersion: 0.23.7
+    created: "2025-11-15T23:02:39.845951234Z"
+    description: A Helm chart for Installing Github Actions runner deployment
+    digest: 8f4d3dd4d80d22c9281a3b07eb675ecb3aa94435df703e61b6f7434928b48f30
+    name: gha-runner-deployment
+    type: application
+    urls:
+    - https://github.com/tinycloud-labs/helm/releases/download/gha-runner-deployment-0.0.1/gha-runner-deployment-0.0.1.tgz
+    version: 0.0.1
   unichart:
   - apiVersion: v2
     appVersion: "1.0"
@@ -34,4 +45,4 @@ entries:
     urls:
     - https://github.com/homecloud-labs/helm/releases/download/unichart-0.0.1/unichart-0.0.1.tgz
     version: 0.0.1
-generated: "2025-11-08T18:14:12.472476049Z"
+generated: "2025-11-15T23:02:39.845964178Z"
