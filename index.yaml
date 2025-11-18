@@ -11,6 +11,19 @@ entries:
     urls:
     - https://github.com/tinycloud-labs/helm/releases/download/gha-runner-deployment-0.0.1/gha-runner-deployment-0.0.1.tgz
     version: 0.0.1
+  nfspersistence:
+  - annotations:
+      category: storage
+    apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-11-18T15:14:36.30382825Z"
+    description: A generic Helm chart for deploying NFS based persistence storage.
+    digest: 09f9c8f5c18c8005cb8806b3de3d8302137e4188128db1c87133cd1e18c952b2
+    name: nfspersistence
+    type: application
+    urls:
+    - https://github.com/tinycloud-labs/helm/releases/download/nfspersistence-0.3.1/nfspersistence-0.3.1.tgz
+    version: 0.3.1
   unichart:
   - apiVersion: v2
     appVersion: "1.0"
@@ -45,4 +58,4 @@ entries:
     urls:
     - https://github.com/homecloud-labs/helm/releases/download/unichart-0.0.1/unichart-0.0.1.tgz
     version: 0.0.1
-generated: "2025-11-15T23:02:39.845964178Z"
+generated: "2025-11-18T15:14:36.3038446Z"
