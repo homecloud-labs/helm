@@ -55,8 +55,8 @@ jobs:
           echo '${{ steps.parse.outputs.charts }}' \
             | jq -r '.[] |
                 "- [" + .name + "](https://github.com/tinycloud-labs/helm/tree/main/charts/" + .name + "): " +
-                .version + " – " +
-                (.description // "—")' \
+                .version + " - " +
+                (.description // "-")' \
             >> $GITHUB_OUTPUT
 
           echo "EOF" >> $GITHUB_OUTPUT
