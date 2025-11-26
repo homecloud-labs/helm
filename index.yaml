@@ -24,6 +24,17 @@ entries:
     urls:
     - https://github.com/tinycloud-labs/helm/releases/download/nfspersistence-0.3.1/nfspersistence-0.3.1.tgz
     version: 0.3.1
+  runner-deployment:
+  - apiVersion: v2
+    appVersion: 0.23.7
+    created: "2025-11-26T03:59:52.689490285Z"
+    description: A Helm chart for Installing Github Actions runner deployment
+    digest: 7d15dd4fcebf5f9d046f5013facba7a74242ffbc41643d215af75de106904ff1
+    name: runner-deployment
+    type: application
+    urls:
+    - https://github.com/tinycloud-labs/helm/releases/download/runner-deployment-0.0.1/runner-deployment-0.0.1.tgz
+    version: 0.0.1
   unichart:
   - apiVersion: v2
     appVersion: "1.0"
@@ -80,4 +91,4 @@ entries:
     urls:
     - https://github.com/homecloud-labs/helm/releases/download/unichart-0.0.1/unichart-0.0.1.tgz
     version: 0.0.1
-generated: "2025-11-24T03:21:00.098561194Z"
+generated: "2025-11-26T03:59:52.689504692Z"
