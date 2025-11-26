@@ -65,8 +65,14 @@ jobs:
 
       - name: Generate index.md
         run: |
-          sed "s|<!--CHART_TABLE-->|${{ steps.table.outputs.table }}|" \
-            .github/chart-index-template.md > index.md
+          awk -v table="${{ steps.table.outputs.table }}" '
+            /<!--CHART_TABLE-->/ {
+              print table
+              next
+            }
+            { print }
+          ' .github/chart-index-template.md > index.md
+
 
       - name: Commit and push
         run: |
