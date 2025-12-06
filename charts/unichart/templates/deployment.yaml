@@ -36,17 +36,16 @@ spec:
                 name: {{ . | quote }}
             {{- end }}
           {{- end }}
-          {{- if and .Values.app.volumeMounts (gt (len .Values.app.volumeMounts) 0) }}
+
+          {{- $vm := .Values.app.volumeMounts | default list }}
+          {{- if and .Values.persistence.enabled (gt (len $vm) 0) }}
           volumeMounts:
-            {{- $claimName := .Values.existingClaim | default (include "app.persistenceName" .) }}
-            {{- if $claimName }}
             {{- range .Values.app.volumeMounts }}
-            - name: {{ $claimName }}
-              mountPath: {{ .mountPath }}
-              subPath: {{ .subPath }}
-            {{- end }}
-            {{- end }}
+            - name: "changeme"
+              mountPath: {{ (index $vm 0).mountPath }}
+              subPath: {{ (index $vm 0).mountPath }}
           {{- end }}
+
           {{- if .Values.app.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
@@ -66,13 +65,23 @@ spec:
             timeoutSeconds: {{ .Values.app.livenessProbe.timeoutSeconds }}
             failureThreshold: {{ .Values.app.livenessProbe.failureThreshold }}
           {{- end }}
+
+      {{- if .Values.persistence.enabled }}
+      {{- if .Values.persistence.existingClaim }}
       volumes:
-        {{- $claimName := .Values.existingClaim | default (include "app.persistenceName" .) }}
-        {{- if $claimName }}
-        - name: {{ $claimName }}
+        - name: "changeme"
           persistentVolumeClaim:
-            claimName: {{ $claimName }}
-        {{- end }}
+            claimName: {{ .Values.persistence.existingClaim }}
+
+      {{- else }}
+      volumes:
+        - name: "changeme"
+          persistentVolumeClaim:
+            claimName: {{ include "app.persistenceName" . }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+
       {{- with .Values.app.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
