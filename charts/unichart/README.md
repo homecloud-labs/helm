@@ -1,6 +1,6 @@
 # Generic Helm Chart (WIP)
 
-A universal chart for many use cases. Supports both stateful and stateless applications. It can provision deployment, statefulset + headless service for DB, storage, and ingress.
+A universal chart for many use cases. Supports both stateful and stateless applications. It can provision deployment, statefulset + headless service for DB, storage with optional NFS backend, and ingress.
 
 | Component | Type         | Purpose                                |
 |-----------|--------------|----------------------------------------|
@@ -9,4 +9,4 @@ A universal chart for many use cases. Supports both stateful and stateless appli
 | `Service` | ClusterIP    | Internal service for app access        |
 | `Ingress` | Ingress Resource      | External app access (optional)         |
 | `Headless Service` | ClusterIP = None | For DB DNS resolution        |
-| `persistence` | PV and PVC | NFS-backend Storage        |
+| `persistence` | PV and PVC | Existing or NFS-backend Storage        |
