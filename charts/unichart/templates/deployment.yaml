@@ -12,12 +12,15 @@ spec:
     metadata:
       labels: {{ include "app.selectorLabels" (dict "role" "app" "context" .) | nindent 8 }}-deployment
     spec:
+      # -- Deployment pods spec --
       containers:
         - name: {{ .Values.app.name }}
           image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
           imagePullPolicy: {{ .Values.app.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.app.containerPort }}
+
+          # -- Env- Vars --
           env:
             {{- if .Values.app.dbHostname }}
             - name: {{ .Values.app.dbHostname }}
@@ -30,6 +33,8 @@ spec:
             {{- end }}
             {{- end }}
           {{- if .Values.app.envFromSecrets.enabled }}
+
+          # -- Secrets Env Vars --
           envFrom:
             {{- range .Values.app.envFromSecrets.secretRefNames }}
             - secretRef:
@@ -37,15 +42,18 @@ spec:
             {{- end }}
           {{- end }}
 
+          # -- Volume mounts --
           {{- $vm := .Values.app.volumeMounts | default list }}
           {{- if and .Values.persistence.enabled (gt (len $vm) 0) }}
           volumeMounts:
-            {{- range .Values.app.volumeMounts }}
-            - name: "changeme"
-              mountPath: {{ (index $vm 0).mountPath }}
-              subPath: {{ (index $vm 0).mountPath }}
+            {{- range $vm }}
+            - name: app-storage
+              mountPath: {{ .mountPath }}
+              subPath: {{ .subPath }}
+            {{- end }}
           {{- end }}
 
+          # -- Readiness and liveness --
           {{- if .Values.app.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
@@ -66,22 +74,22 @@ spec:
             failureThreshold: {{ .Values.app.livenessProbe.failureThreshold }}
           {{- end }}
 
+      # -- PVC spec --
       {{- if .Values.persistence.enabled }}
       {{- if .Values.persistence.existingClaim }}
       volumes:
-        - name: "changeme"
+        - name: app-storage
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim }}
-
       {{- else }}
       volumes:
-        - name: "changeme"
+        - name: app-storage
           persistentVolumeClaim:
             claimName: {{ include "app.persistenceName" . }}
       {{- end }}
       {{- end }}
-      {{- end }}
 
+      ## -- Affinity spec --
       {{- with .Values.app.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
