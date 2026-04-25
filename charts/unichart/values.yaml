@@ -204,3 +204,8 @@ ingress:
   # annotations:
   #   cert-manager.io/cluster-issuer: "letsencrypt-prod"
   annotations: {}
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - somehost.example.com
